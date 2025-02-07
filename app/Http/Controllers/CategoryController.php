@@ -17,11 +17,14 @@ class CategoryController extends Controller
             'data' => $categories
         ], 200);
     }
+
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|string|max:255']);
+        $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
 
-        $category = Category::created($request->all());
+        $category = Category::create($request->all());
 
         return response()->json([
             'status' => 201,
@@ -29,6 +32,7 @@ class CategoryController extends Controller
             'data' => $category
         ], 201);
     }
+
     public function show($id)
     {
         $category = Category::find($id);
@@ -60,12 +64,15 @@ class CategoryController extends Controller
             ], 404);
         }
 
-        $request->validate(['name' => 'string|mak:255']);
+        $request->validate([
+            'name' => 'string|max:255'
+        ]);
+
         $category->update($request->all());
 
         return response()->json([
             'status' => 200,
-            'message' => 'Category update successfully.',
+            'message' => 'Category updated successfully.',
             'data' => $category
         ], 200);
     }
@@ -79,14 +86,14 @@ class CategoryController extends Controller
                 'status' => 404,
                 'message' => 'Category not found.',
                 'data' => null
-            ], 400);
+            ], 404);
         }
 
         $category->delete();
 
         return response()->json([
             'status' => 200,
-            'message' => 'Category update successfully.',
+            'message' => 'Category deleted successfully.',
             'data' => null
         ], 200);
     }
