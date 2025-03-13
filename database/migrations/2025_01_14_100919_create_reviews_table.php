@@ -13,11 +13,22 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->double('rating')->nullable();
-            $table->string('comments');
-            $table->timestamps();
+            $table->unsignedBigInteger('book_id');
+            $table->unsignedBigInteger('user1_id');
+            $table->integer('rating');
+            $table->text('comment')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+
+            // Foreign key constraints
+            $table->foreign('book_id')
+                  ->references('id')
+                  ->on('books')
+                  ->onDelete('cascade');
+
+            $table->foreign('user1_id')
+                  ->references('id')
+                  ->on('user1s')
+                  ->onDelete('cascade');
         });
     }
 

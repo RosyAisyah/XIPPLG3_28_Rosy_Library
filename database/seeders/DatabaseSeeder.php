@@ -5,6 +5,13 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Loans;
+
+Loans::create([
+    'kolom_1' => 'nilai_1',
+    'kolom_2' => 'nilai_2',
+]);
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,4 +27,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
     }
+
 }
